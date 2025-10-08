@@ -32,8 +32,7 @@ Aplicația este dezvoltată exclusiv în Python, folosind următoarele librării
 | **Analiză date (extensibil)** | `pandas` | Prelucrare și export de tabele, rapoarte sau statistici |
 | **Diverse** | `flash`, `redirect`, `render_template`, `url_for`, `make_response` | Funcții utile Flask pentru UX și control rutare |
 
----
-
+```
 gestionare-angajati/
 ├── app.py — punctul de intrare al aplicației (definirea rutelor, logica principală)
 ├── templates/ — folder cu fișierele HTML (interfața web)
@@ -48,7 +47,7 @@ gestionare-angajati/
 ├── angajati.db — baza de date SQLite3 (fișier local cu datele angajaților)
 ├── angajati.xlsx, angajati_export.xlsx — fișiere de import / export Excel
 └── README.md — acest fișier de documentație
-
+```
 ---
 
 ##  Instalare și rulare locală
