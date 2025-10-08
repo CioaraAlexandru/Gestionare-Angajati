@@ -34,21 +34,21 @@ Aplicația este dezvoltată exclusiv în Python, folosind următoarele librării
 
 ```
 gestionare-angajati/
-├── app.py — punctul de intrare al aplicației (definirea rutelor, logica principală)
+├── app.py 
 ├── templates/ — folder cu fișierele HTML (interfața web)
-│ ├── base.html
-│ ├── login.html
+│ ├── adauga.html
+│ ├── afisare.html
+│ ├── calcul_salar.html
+│ ├── fluturas.html
 │ ├── index.html
-│ ├── adauga_angajat.html
-│ ├── modifica_angajat.html
-│ └── fluturas.html
-├── static/ — fișiere statice (CSS, imagini etc.)
-│ └── style.css
-├── angajati.db — baza de date SQLite3 (fișier local cu datele angajaților)
-├── angajati.xlsx, angajati_export.xlsx — fișiere de import / export Excel
-└── README.md — acest fișier de documentație
+│ ├── login.html
+│ ├── modifica.html
+│ └── salarizare.html
+├── angajati.db
+├── angajati.xlsx, angajati_export.xlsx 
+└── README.md 
 ```
----
+
 
 ##  Instalare și rulare locală
 
