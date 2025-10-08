@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Salarizare</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #f5f7fa;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 2rem;
+            color: #2c3e50;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        nav {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 14px;
+            margin: 4px;
+            background: #3498db;
+            color: #fff;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover { background: #217dbb; }
+        .btn-success { background: #27ae60; }
+        .btn-success:hover { background: #1e8449; }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Filtre */
+        .filter-form {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-form select, .filter-form button {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 0.9rem;
+        }
+
+        /* Tabel */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        thead {
+            background: #3498db;
+            color: #fff;
+        }
+
+        tr:nth-child(even) { background: #f9f9f9; }
+        tr:hover { background: #eef6fb; }
+
+        td.actions {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        td.actions .btn {
+            font-size: 0.8rem;
+            padding: 6px 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigare -->
+    <nav>
+        <form action="{{ url_for('index') }}" method="get" style="display:inline;">
+            <button type="submit" class="btn">🏠 Acasă</button>
+        </form>
+    </nav>
+
+    <div class="container">
+        <h1>📊 Salarizare Angajați</h1>
+
+        <!-- Tabel cu angajați -->
+        <table>
+            <thead>
+                <tr>
+                    <th>CNP</th>
+                    <th>Nume</th>
+                    <th>Prenume</th>
+                    <th>Funcție</th>
+                    <th>Departament</th>
+                    <th>Salariu</th>
+                    <th>Acțiuni</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for angajat in angajati %}
+                <tr>
+                    <td>{{ angajat['cnp'] }}</td>
+                    <td>{{ angajat['nume'] }}</td>
+                    <td>{{ angajat['prenume'] }}</td>
+                    <td>{{ angajat['functie'] }}</td>
+                    <td>{{ angajat['departament'] }}</td>
+                    <td>{{ angajat['salariu'] }}</td>
+                    <td class="actions">
+
+                         <a href="{{ url_for('calcul_salar', cnp=angajat['cnp']) }}" class="btn">💰 Calcul Salariu</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="7" style="color:#e74c3c; font-weight:600;">Nu există angajați pentru perioada selectată.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

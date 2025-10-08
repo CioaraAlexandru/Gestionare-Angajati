@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Fluturaș salariu</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 30px; }
+        h2 { text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background: #f4f4f4; }
+    </style>
+</head>
+<body>
+    <h2>Fluturaș de salariu - {{ angajat['nume'] }} {{ angajat['prenume'] }}</h2>
+    <p>An: {{ an }}, Luna: {{ luna }}</p>
+
+    <table>
+        <tr><th>Salariu de bază</th><td>{{ salariu_baza }} lei</td></tr>
+        <tr><th>Zile lucrate</th><td>{{ zile_lucrate }} ({{ ore_lucrate }} ore)</td></tr>
+        <tr><th>Zile concediu</th><td>{{ zile_co }}</td></tr>
+        <tr><th>Zile medicale</th><td>{{ zile_medicale }}</td></tr>
+        <tr><th>Plata zile lucrate</th><td>{{ plata_lucrate }} lei</td></tr>
+        <tr><th>Plata concediu</th><td>{{ plata_co }} lei</td></tr>
+        <tr><th>Plata medicale</th><td>{{ plata_medicale }} lei</td></tr>
+        <tr><th>Total brut calculat</th><td>{{ salariu_total }} lei</td></tr>
+        <tr><th>CAS (10%)</th><td>{{ CAS }} lei</td></tr>
+        <tr><th>CASS (25%)</th><td>{{ CASS }} lei</td></tr>
+        <tr><th>Impozit (10%)</th><td>{{ impozit }} lei</td></tr>
+        <tr><th><b>Salariu net</b></th><td><b>{{ salariu_net }} lei</b></td></tr>
+        <tr><th>Concediu rămas</th><td>{{ angajat['concediu_ramas'] }}</td></tr>
+    </table>
+    <div style="margin-top:20px; text-align:center;">
+    <a href="{{ url_for('salarizare') }}">
+        <button>Înapoi la salarizare</button>
+    </a>
+
+    <a href="{{ url_for('fluturas_pdf', cnp=angajat['cnp'], an=an, luna=luna) }}">
+        <button>Salvează fluturaș în PDF</button>
+    </a>
+    </div>
+</body>
+</html>
+

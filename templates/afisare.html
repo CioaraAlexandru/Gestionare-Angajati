@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8" />
+    <title>Lista Angajați</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600&display=swap" rel="stylesheet" />
+    <style>
+        /* ===== BODY ===== */
+        body {
+            background: #f5f7fa;
+            color: #333;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #2c3e50;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 12px;
+            margin: 4px;
+            color: #fff;
+            background: #3498db;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover { background: #217dbb; }
+        .btn-danger { background: #e74c3c; }
+        .btn-danger:hover { background: #c0392b; }
+        .btn-success { background: #27ae60; }
+        .btn-success:hover { background: #1e8449; }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            width: 98%;
+            margin: 0 auto;
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* ===== FORM FILTRARE ===== */
+        .filter-form {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .filter-form div {
+            min-width: 150px;
+            flex: 1 1 150px;
+        }
+        .filter-form label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .filter-form select, .filter-form button {
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.9rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* ===== TABEL ===== */
+        .table-wrapper {
+            overflow-x: auto; /* scroll pe mobil */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+
+        th, td {
+            padding: 4px 6px;
+            border: 1px solid #ddd;
+            text-align: center;
+            font-size: 0.70rem;
+        }
+
+        thead { background: #3498db; color: #fff; }
+        th {
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        tr:nth-child(even) { background: #f9f9f9; }
+        tr:hover { background: #eef6fb; }
+
+        /* Trunchiere text lung pentru coloanele cu text lung */
+        td.truncate {
+            max-width: 120px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Coloana acțiuni */
+        td.actions {
+            display: flex;
+            justify-content: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+        td.actions .btn {
+            padding: 6px 8px;
+            font-size: 0.8rem;
+            min-width: auto;
+        }
+
+        /* ===== LINK BACK ===== */
+        a.back {
+            display: block;
+            margin: 1.5rem auto 0;
+            width: fit-content;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        a.back:hover { text-decoration: underline; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .filter-form { gap: 0.5rem; }
+            th, td { font-size: 0.75rem; padding: 6px 8px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <form action="{{ url_for('index') }}" method="get" style="display:inline;">
+            <button type="submit" class="btn">🏠 Acasă</button>
+        </form>
+        <form action="{{ url_for('logout') }}" method="get" style="display:inline;">
+            <button type="submit" class="btn btn-danger">🚪 Logout</button>
+        </form>
+    </nav>
+
+    <div class="container">
+        <h1>📋 Lista Angajați</h1>
+
+        <!-- FORM FILTRARE -->
+        <form method="POST" class="filter-form">
+            <div>
+                <label>Departament:</label>
+                <select name="departament">
+                    <option value="Toate">Toate</option>
+                    {% for d in departamente %}
+                        <option value="{{ d }}" {% if departament_selectat == d %}selected{% endif %}>{{ d }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div>
+                <label>Senioritate:</label>
+                <select name="senioritate">
+                    <option value="Toate">Toate</option>
+                    {% for s in senioritati %}
+                        <option value="{{ s }}" {% if senioritate_selectata == s %}selected{% endif %}>{{ s }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+    <label>Funcție:</label>
+    <select name="functie">
+        <option value="Toate">Toate</option>
+        {% for f in functii %}
+            <option value="{{ f }}" {% if functie_selectata == f %}selected{% endif %}>{{ f }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<div>
+    <label>Normă:</label>
+    <select name="norma">
+        <option value="Toate">Toate</option>
+        {% for n in norme %}
+            <option value="{{ n }}" {% if norma_selectata == n %}selected{% endif %}>{{ n }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<div>
+    <label>Status:</label>
+    <select name="status">
+        <option value="Toate">Toate</option>
+        {% for s in statusuri %}
+            <option value="{{ s }}" {% if status_selectat == s %}selected{% endif %}>{{ s }}</option>
+        {% endfor %}
+    </select>
+</div>
+
+<div>
+    <label>Salariu minim:</label>
+    <input type="number" name="salariu_min" value="{{ salariu_min }}">
+</div>
+<div>
+    <label>Salariu maxim:</label>
+    <input type="number" name="salariu_max" value="{{ salariu_max }}">
+</div>
+
+<div>
+    <label>Caută după nume:</label>
+    <input type="text" name="nume_cautat" value="{{ nume_cautat }}">
+</div>
+
+            <button type="submit" class="btn btn-success">🔍 Filtrează</button>
+        </form>
+
+        <!-- TABEL -->
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>CNP</th>
+                        <th>Nume</th>
+                        <th>Prenume</th>
+                        <th>Varsta</th>
+                        <th>Telefon</th>
+                        <th>Email</th>
+                        <th>Adresă</th>
+                        <th>Educatie</th>
+                        <th>Funcție</th>
+                        <th>Departament</th>
+                        <th>Senioritate</th>
+                        <th>Norma</th>
+                        <th>IBAN</th>
+                        <th>Salariu</th>
+                        <th>Data Angajare</th>
+                        <th>Data Incetare</th>
+                        <th>CT</th>
+                        <th>CR</th>
+                        <th>Status</th>
+                        <th>Acțiuni</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for angajat in angajati %}
+                    <tr>
+                        <td>{{ angajat['cnp'] }}</td>
+                        <td>{{ angajat['nume'] }}</td>
+                        <td>{{ angajat['prenume'] }}</td>
+                        <td>{{ angajat['varsta'] }}</td>
+                        <td>{{ angajat['telefon'] }}</td>
+                        <td class="truncate" title="{{ angajat['adresa_email'] }}">{{ angajat['adresa_email'] }}</td>
+                        <td class="truncate" title="{{ angajat['adresa_domiciliu'] }}">{{ angajat['adresa_domiciliu'][:15] }}...</td>
+                        <td>{{ angajat['nivel_educatie'] }}</td>
+                        <td>{{ angajat['functie'] }}</td>
+                        <td>{{ angajat['departament'] }}</td>
+                        <td>{{ angajat['senioritate'] }}</td>
+                        <td>{{ angajat['norma'] }}</td>
+                        <td>{{ angajat['iban'] }}</td>
+                        <td>{{ angajat['salariu'] }}</td>
+                        <td>{{ angajat['data_angajare'] }}</td>
+                        <td>{{ angajat['data_incetare_contract'] }}</td>
+                        <td>{{ angajat['concediu_total'] }}</td>
+                        <td>{{ angajat['concediu_ramas'] }}</td>
+                        <td>{{ angajat['status_angajat'] }}</td>
+                        <td class="actions">
+                            <a href="{{ url_for('formular_modificare', cnp=angajat[0]) }}" class="btn">✏️</a>
+                            <a href="{{ url_for('sterge_angajat', cnp=angajat[0]) }}" class="btn btn-danger" onclick="return confirm('Ești sigur că vrei să ștergi acest angajat?');">🗑️</a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="13" style="color:#e74c3c; font-weight:600;">Nu există angajați înregistrați.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div style="text-align:center;">
+            <a href="{{ url_for('export_excel') }}" class="btn btn-success">📊 Exportă în Excel</a>
+        </div>
+
+        <a href="/" class="back">⬅ Înapoi la Meniu</a>
+    </div>
+</body>
+</html>
+
+
+
+
+
