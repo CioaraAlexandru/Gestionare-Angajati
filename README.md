@@ -34,25 +34,20 @@ Aplicația este dezvoltată exclusiv în Python, folosind următoarele librării
 
 ---
 
-##  Structura proiectului
-
 gestionare-angajati/
-│
-├── app.py # Logica principală Flask
-├── templates/ # Pagini HTML (interfața)
+├── app.py — punctul de intrare al aplicației (definirea rutelor, logica principală)
+├── templates/ — folder cu fișierele HTML (interfața web)
+│ ├── base.html
 │ ├── login.html
 │ ├── index.html
 │ ├── adauga_angajat.html
 │ ├── modifica_angajat.html
-│ ├── fluturas.html
-│ └── base.html
-│
-├── static/ # CSS, imagini, fișiere statice
+│ └── fluturas.html
+├── static/ — fișiere statice (CSS, imagini etc.)
 │ └── style.css
-│
-├── angajati.db # Baza de date SQLite3
-└── README.md
-
+├── angajati.db — baza de date SQLite3 (fișier local cu datele angajaților)
+├── angajati.xlsx, angajati_export.xlsx — fișiere de import / export Excel
+└── README.md — acest fișier de documentație
 
 ---
 
@@ -80,3 +75,6 @@ Acceseaza in browser
 http://127.0.0.1:5000/
 
 Autentifică-te cu contul de administrator (admin / parola123)
+
+
+Autor - Alexandru Cioara 2025
