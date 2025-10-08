@@ -64,12 +64,19 @@ gestionare-angajati/
    cd gestionare-angajati
 
 BASH
+
 python -m venv venv
+
 source venv/bin/activate     # Linux / Mac
+
 venv\Scripts\activate        # Windows
+
 pip install flask pandas reportlab
+
 python app.py
 
 Acceseaza in browser
+
 http://127.0.0.1:5000/
+
 Autentifică-te cu contul de administrator (admin / parola123)
