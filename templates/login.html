@@ -104,7 +104,7 @@
             <div class="error">{{ error }}</div>
         {% endif %}
 
-        <form method="POST" action="{{ url_for('login') }}">
+        <form method="POST" action="{{ url_for('routes.login') }}">
             <div class="form-group">
                 <label for="username">👤 Utilizator</label>
                 <input type="text" id="username" name="username" required placeholder="Introduceți numele de utilizator">

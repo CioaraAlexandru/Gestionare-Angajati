@@ -103,7 +103,7 @@
 <body>
     <!-- Navigare -->
     <nav>
-        <form action="{{ url_for('index') }}" method="get" style="display:inline;">
+        <form action="{{ url_for('routes.index') }}" method="get" style="display:inline;">
             <button type="submit" class="btn">🏠 Acasă</button>
         </form>
     </nav>
@@ -135,7 +135,7 @@
                     <td>{{ angajat['salariu'] }}</td>
                     <td class="actions">
 
-                         <a href="{{ url_for('calcul_salar', cnp=angajat['cnp']) }}" class="btn">💰 Calcul Salariu</a>
+                         <a href="{{ url_for('routes.calcul_salar', cnp=angajat['cnp']) }}" class="btn">💰 Calcul Salariu</a>
                     </td>
                 </tr>
                 {% else %}

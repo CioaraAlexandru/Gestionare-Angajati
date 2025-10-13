@@ -110,10 +110,10 @@
 </head>
 <body>
     <nav>
-        <form action="{{ url_for('index') }}" method="get">
+        <form action="{{ url_for('routes.index') }}" method="get">
             <button type="submit">🏠 Acasă</button>
         </form>
-        <form action="{{ url_for('logout') }}" method="get">
+        <form action="{{ url_for('routes.logout') }}" method="get">
             <button type="submit">🚪 Logout</button>
         </form>
     </nav>

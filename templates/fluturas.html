@@ -31,11 +31,11 @@
         <tr><th>Concediu rămas</th><td>{{ angajat['concediu_ramas'] }}</td></tr>
     </table>
     <div style="margin-top:20px; text-align:center;">
-    <a href="{{ url_for('salarizare') }}">
+    <a href="{{ url_for('routes.salarizare') }}">
         <button>Înapoi la salarizare</button>
     </a>
 
-    <a href="{{ url_for('fluturas_pdf', cnp=angajat['cnp'], an=an, luna=luna) }}">
+    <a href="{{ url_for('routes.fluturas_pdf', cnp=angajat['cnp'], an=an, luna=luna) }}">
         <button>Salvează fluturaș în PDF</button>
     </a>
     </div>
