@@ -47,7 +47,7 @@ gestionare-angajati/
 │ ├── login.html
 │ ├── modifica.html
 │ └── salarizare.html
-├── amain.py
+├── main.py
 ├── angajati.db
 ├── angajati.xlsx, angajati_export.xlsx 
 └── README.md 
