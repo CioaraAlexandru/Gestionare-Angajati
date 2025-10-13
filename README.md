@@ -34,7 +34,10 @@ Aplicația este dezvoltată exclusiv în Python, folosind următoarele librării
 
 ```
 gestionare-angajati/
-├── app.py 
+├── app/
+│ ├── __init__.py
+│ ├── funct.py
+│ ├── routes.py
 ├── templates/ — folder cu fișierele HTML (interfața web)
 │ ├── adauga.html
 │ ├── afisare.html
@@ -44,6 +47,7 @@ gestionare-angajati/
 │ ├── login.html
 │ ├── modifica.html
 │ └── salarizare.html
+├── amain.py
 ├── angajati.db
 ├── angajati.xlsx, angajati_export.xlsx 
 └── README.md 
@@ -67,7 +71,7 @@ venv\Scripts\activate        # Windows
 
 pip install flask pandas reportlab
 
-python app.py
+python main.py
 
 Acceseaza in browser
 
